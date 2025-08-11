@@ -1,0 +1,51 @@
+import React, { useState } from 'react';
+import './Sidebar.scss';
+import {
+
+  Typography,
+
+} from '@mui/material';
+import CollectionsComponent from '../stac/CollectionsComponent';
+import ItemDetailsComponent from '../stac/ItemDetailsComponent';
+
+const SidebarComponent = ({ onHoverItem, onItemSelect, onCollectionSelect, aoiCoords }) => {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [collectionId, setCollectionId] = useState(null);
+
+
+  const handleItemSelect = (item) => {
+    setSelectedItem(item);
+    onItemSelect(item);
+  };
+
+  const handleCollectionSelect = (id) => {
+    setCollectionId(id);
+    onCollectionSelect(id);
+  };
+
+  const handleBack = () => {
+    setSelectedItem(null);
+  };
+
+  return (
+    <div className="sidebar">
+     
+      {selectedItem ? (
+        <ItemDetailsComponent
+        collectionId={collectionId}
+        selectedItem={selectedItem}
+        onBack={handleBack}
+      />
+      ) : (
+        <CollectionsComponent           onHoverItem={onHoverItem}
+        onItemSelect={handleItemSelect}
+        onCollectionSelect={handleCollectionSelect} aoiCoords={aoiCoords} params={params} />
+      )
+      }
+    </div>
+  );
+
+
+};
+
+export default SidebarComponent;

@@ -1,0 +1,47 @@
+.processing-panel{
+    width: 400px;
+
+    top:60px;
+    right: 60px;
+    position: absolute; // Added to position the panel on the right
+    background-color: #f5f5f5;
+    box-shadow: 0 0 6px #0003;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none; // Hide the sidebar when not visible
+}
+
+.panel-header {
+    padding: 10px;
+    display: flex;
+    background-color: #0a4393;
+    color: #fff;
+    height: 25px;
+    max-height: 65px;
+    min-height: 50px;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); // Added bottom shadow
+}
+
+
+.panel-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ margin-right: 10px;
+  width: 35px; // Adjust size as needed
+  height: 35px; // Adjust size as needed
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2); // Adjust color as needed
+}
+
+.panel-content{
+    height: 80%;
+    overflow-y: auto; // Change to allow scrolling
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+}
