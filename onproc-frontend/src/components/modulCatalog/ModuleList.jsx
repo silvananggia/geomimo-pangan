@@ -11,25 +11,16 @@ function ModuleList() {
   const modules = [
     {
       id: 1,
-      title: "Deteksi Area Kebakaran",
+      title: "Indeks Penanaman Padi",
       subtitle: user ? "":"(Akses Memerlukan Login)",
       url: user ? "/map" : "/login",
       description:
-        "Modul pemetaan geospasial yang dirancang untuk mendeteksi dan memetakan area lahan terbakar berdasarkan data penginderaan jauh. Hasil dari modul ini berguna untuk mendukung kegiatan pemantauan kebakaran hutan dan lahan, perencanaan pemulihan, serta pengambilan keputusan dalam mitigasi bencana lingkungan.",
+        "Indeks Penanaman Padi dari data Satelit Sentinel-1.",
       datasets: "Sentinel-2, Landsat 8/9",
       iconUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/26d491c1fe71ad3856bc02054b6aae605efec76a?placeholderIfAbsent=true&apiKey=c794d0341bde47ac8d2a26f34a39214e",
     },
     {
-      id: 2,
-      title: "Hotspot",
-      url: "/info-hotspot",
-      description:
-        "Modul pemetaan geospasial yang digunakan untuk mendeteksi dan memvisualisasikan titik-titik panas (hotspot) yang mengindikasikan potensi kejadian kebakaran di suatu wilayah. Hasil dari modul ini dapat digunakan untuk pemantauan kebakaran secara dini, analisis sebaran titik api, serta dukungan pengambilan keputusan dalam upaya mitigasi dan penanggulangan bencana kebakaran hutan dan lahan.",
-      datasets: "Modis, VIIRS",
-      iconUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/9e0eb0f166f711be45824a1ac1e055d497412cc7?placeholderIfAbsent=true&apiKey=c794d0341bde47ac8d2a26f34a39214e",
-    },
-    {
-      id: 3,
+      id:2,
       title: "Fase Pertumbuhan Padi",
       url: "/info-fase-padi",
       description:

@@ -28,14 +28,20 @@ function jobReducer(job = initialstate, action) {
     case CREATE_JOB:
       return{
         ...job,
-        loading:false
+        loading: false,
+        // Keep the existing joblist when creating a new job
+        joblist: Array.isArray(job.joblist) ? job.joblist : []
     }
 
     case GET_ALL_JOB:
+      console.log('Reducer GET_ALL_JOB - payload:', action.payload);
+      console.log('Reducer GET_ALL_JOB - payload type:', typeof action.payload);
+      console.log('Reducer GET_ALL_JOB - payload isArray:', Array.isArray(action.payload));
+      
       return {
         loading: false,
         errmessage: "",
-        joblist: action.payload,
+        joblist: Array.isArray(action.payload) ? action.payload : [],
         jobobj: {},
       };
 

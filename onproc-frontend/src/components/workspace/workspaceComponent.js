@@ -93,28 +93,14 @@ const WorkspaceComponent = () => {
                 ) : (
                     <>
                         <Tabs value={tabValue} onChange={handleTabChange}>
-                            <Tab label="Module" />
-                            <Tab label="Processing Task" />
+
                             <Tab label="Job List" />
                         </Tabs>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 {tabValue === 0 && ( // Show ProcessingTaskComponent when first tab is selected
                                     
-                                    <ModuleComponent onTabChange={handleTabChange} />
-                                )}
-                                {tabValue === 1 && ( // Show JobListComponent when second tab is selected
-                                    <ProcessingTaskComponent
-                                    dataDropItem={dataDropItem}
-                                    setdataDropItem={setdataDropItem}
-                                    sign={sign}
-                                    setSign={setSign}
-                                    threshold={threshold}
-                                    setThreshold={setThreshold}
-                                    onSubmit={handleSubmit}
-                                />
-                                )}
-                                {tabValue === 2 && ( // Show JobListComponent when second tab is selected
+                                  
                                     <JobListComponent />
                                 )}
                             </Grid>

@@ -37,10 +37,11 @@ const ProcessingComponent = () => {
 
     const handleSubmit = async () => {
         const newJobId = uuidv4();
-        const jobname = `Burned Area Calculation - ${dataDropItem}`;
+        const jobname = `IP Padi`;
         const cpurequired = '1';
         const priority = '1';
-        const command = `${process.env.REACT_APP_PROCESSING_URL}/burnedarea?data=${dataDropItem}&sign=${sign}&threshold=${threshold}&idproses=${newJobId}`;
+        //const command = `${process.env.REACT_APP_PROCESSING_URL}/burnedarea?data=${dataDropItem}&sign=${sign}&threshold=${threshold}&idproses=${newJobId}`;
+        const command = `http://localhost:5000/run_ip_padi?implementation=modul_ip_padi&aoi_xmin=107.44&aoi_xmax=107.96&aoi_ymin=-6.74&aoi_ymax=-6.11&output=Subang&id_proses=${newJobId}`;
         console.log(user);
         console.log(user.username);
         try {

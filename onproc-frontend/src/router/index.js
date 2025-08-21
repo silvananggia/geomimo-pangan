@@ -22,6 +22,8 @@ const InfoFasePadi = lazy(() => import('../components/frame/InfoFasePadi'));
 const InfoZPPI = lazy(() => import('../components/frame/ZPPI/InfoZPPI'));
 const InfoRawanSawah = lazy(() => import('../components/frame/RawanSawah/InfoRawanSawah'));
 
+const MapWorkspace = lazy(() => import('../components/mapWorkspace/MapWorkspace'));
+
 const PublicRoute = ({ children }) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userRole = user ? user.role : null;
@@ -79,7 +81,7 @@ function MyRouter() {
             <Route path='/map' element={
                 <Suspense fallback={<Loading />}>
                     <PublicRoute>
-                        <Map />
+                        <MapWorkspace />
                     </PublicRoute>
                 </Suspense>
             } />

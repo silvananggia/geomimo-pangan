@@ -33,14 +33,22 @@ export const getJobById = (id) => async (dispatch) => {
 export const getAllJobsByUser = (username) => async (dispatch) => {
   try {
     const res = await JobService.getAllJobsByUser(username);
+    console.log('API response for getAllJobsByUser:', res);
+    console.log('API response data:', res.data);
+    console.log('API response data type:', typeof res.data);
+    console.log('API response data isArray:', Array.isArray(res.data));
+    
     dispatch({
       type: GET_ALL_JOB,
       payload: res.data,
     });
   } catch (error) {
+    console.error('Error fetching jobs:', error);
+    console.error('Error response:', error.response);
+    // Ensure we always dispatch an array, even on error
     dispatch({
       type: GET_ALL_JOB,
-      payload: error.response.data.error,
+      payload: [],
     });
   }
 };

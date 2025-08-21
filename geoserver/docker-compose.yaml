@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  geoserver:
+    build: .  # Build the custom image using the Dockerfile in the current direct>
+    container_name: geoserver
+    ports:
+      - "8080:8080"
+    volumes:
+      - /home/geodata/onproc/geoserverdata:/opt/geoserver_data/
+    environment:
+      - JAVA_OPTS=-Duser.timezone=GMT -Dorg.geotools.shapefile.datetime=true
+      - DGEOSERVER_CSRF_DISABLED=true
+      - INSTALL_EXTENSIONS=true
+      - STABLE_EXTENSIONS=wps,csw
+      - EXTRA_JAVA_OPTS=-Xms1G -Xmx2G
+      - SKIP_DEMO_DATA=true
+      - POSTGRES_JNDI_ENABLED=true
+      - POSTGRES_HOST=10.28.12.109
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=geoserver
+      - POSTGRES_USERNAME=stacuser
+      - POSTGRES_PASSWORD=P4ssw0rd?
+      - POSTGRES_JNDI_RESOURCE_NAME=jdbc/postgres
+    restart: always
+
+volumes:
+  geoserver_data:

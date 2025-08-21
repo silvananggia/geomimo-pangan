@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  ip_padi_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ip_padi
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data/:/app/data  
+      - ./workspace:/app/workspace       
+    restart: unless-stopped

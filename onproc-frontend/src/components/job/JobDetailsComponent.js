@@ -37,6 +37,14 @@ const JobDetailsComponent = ({ jobId }) => {
         dispatch(getJobById(jobId));
     }, [dispatch, jobId]);
 
+    const formatDuration = (milliseconds) => {
+        const totalSeconds = Math.floor(milliseconds / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        return `${hours}h ${minutes}m ${seconds}s`;
+    };
+
     const handleBack = () => {
         dispatch(setSelectedJob(null)); // Clear the selected job ID
     };
@@ -63,6 +71,10 @@ const JobDetailsComponent = ({ jobId }) => {
         return <div>Loading job details...</div>;
     }
 
+    const startTime = jobDetails.time_start ? new Date(jobDetails.time_start) : null;
+    const finishTime = jobDetails.time_finish ? new Date(jobDetails.time_finish) : null;
+    const processingTime = startTime && finishTime ? formatDuration(finishTime - startTime) : null;
+
     return (
         <div>
             <Button onClick={handleBack} variant="outlined">Back to Job List</Button> {/* Back button */}
@@ -70,8 +82,12 @@ const JobDetailsComponent = ({ jobId }) => {
             <Box display="grid" gridTemplateColumns="1fr 2fr" gap={2}>
                 <Typography variant="body2" fontWeight="bold">Job Name:</Typography>
                 <Typography variant="body2">{jobDetails.job_name}</Typography>
-                <Typography variant="body2" fontWeight="bold">Date:</Typography>
-                <Typography variant="body2">{new Date(jobDetails.created_at).toLocaleString()}</Typography>
+                <Typography variant="body2" fontWeight="bold">Time Start:</Typography>
+                <Typography variant="body2">{startTime ? startTime.toLocaleString() : '—'}</Typography>
+                <Typography variant="body2" fontWeight="bold">Time Finish:</Typography>
+                <Typography variant="body2">{finishTime ? finishTime.toLocaleString() : '—'}</Typography>
+                <Typography variant="body2" fontWeight="bold">Processing Time:</Typography>
+                <Typography variant="body2">{processingTime || '—'}</Typography>
                 <Typography variant="body2" fontWeight="bold">Job ID:</Typography>
                 <Typography variant="body2">{jobDetails.id}</Typography>
 
@@ -79,16 +95,43 @@ const JobDetailsComponent = ({ jobId }) => {
                 {(() => {
                     if (jobDetails && jobDetails.command) {
                         const urlParams = new URLSearchParams(jobDetails.command.split('?')[1]);
-                        const data = urlParams.get('data');
-                        const sign = urlParams.get('sign');
-                        const threshold = urlParams.get('threshold');
+                        
+                        // Extract all parameters in use
+                        const per1sikluspadi = urlParams.get('per1sikluspadi');
+                        const perekstremmin = urlParams.get('perekstremmin');
+                        const perekstremmax = urlParams.get('perekstremmax');
+                        const btsbedaekstremmaxmin = urlParams.get('btsbedaekstremmaxmin');
+                        const batasekstremmin = urlParams.get('batasekstremmin');
+                        const jlmkelaspertumbuhanminimum = urlParams.get('jlmkelaspertumbuhanminimum');
+                        const aoi_xmin = urlParams.get('aoi_xmin');
+                        const aoi_xmax = urlParams.get('aoi_xmax');
+                        const aoi_ymin = urlParams.get('aoi_ymin');
+                        const aoi_ymax = urlParams.get('aoi_ymax');
 
                         return (
                             <>
-                                <Typography variant="body2" fontWeight="bold">Data:</Typography>
-                                <Typography variant="body2">{data}</Typography>
-                                <Typography variant="body2" fontWeight="bold">Threshold:</Typography>
-                                <Typography variant="body2">{sign} {threshold}</Typography>
+                                
+                                <Typography variant="body2" fontWeight="bold">Per 1 Siklus Padi:</Typography>
+                                <Typography variant="body2">{per1sikluspadi}</Typography>
+                                
+                                <Typography variant="body2" fontWeight="bold">Per Ekstrem Min:</Typography>
+                                <Typography variant="body2">{perekstremmin}</Typography>
+                                
+                                <Typography variant="body2" fontWeight="bold">Per Ekstrem Max:</Typography>
+                                <Typography variant="body2">{perekstremmax}</Typography>
+                                
+                                <Typography variant="body2" fontWeight="bold">Batas Beda Ekstrem Max-Min:</Typography>
+                                <Typography variant="body2">{btsbedaekstremmaxmin}</Typography>
+                                
+                                <Typography variant="body2" fontWeight="bold">Batas Ekstrem Min:</Typography>
+                                <Typography variant="body2">{batasekstremmin}</Typography>
+                                
+                                <Typography variant="body2" fontWeight="bold">Jumlah Kelas Pertumbuhan Minimum:</Typography>
+                                <Typography variant="body2">{jlmkelaspertumbuhanminimum}</Typography>
+                                
+                                <Typography variant="body2" fontWeight="bold">AOI Coordinates:</Typography>
+                                <Typography variant="body2">X: {aoi_xmin} to {aoi_xmax}, Y: {aoi_ymin} to {aoi_ymax}</Typography>
+                                
                             </>
                         );
                     }
